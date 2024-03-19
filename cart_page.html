@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickPoint</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">ClickPoint</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact us</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link"><i class="fas fa-shopping-cart"></i></a>
+                <a href="#" class="nav-item nav-link"><i class="fas fa-user"></i></a>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section>
+    <div class="container-fluid mt-4">
+        <!-- Category and Product List -->
+        <main>
+            <div class="row">
+                <!-- Category List -->
+                <div class="col-md-2">
+                    <h4>Categories</h4>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">1st category</a>
+                        <a href="#" class="list-group-item list-group-item-action">2nd category</a>
+                        <a href="#" class="list-group-item list-group-item-action">3rd category</a>
+                        <a href="#" class="list-group-item list-group-item-action">4th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">5th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">6th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">7th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">8th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">9th category</a>
+                        <a href="#" class="list-group-item list-group-item-action">10th category</a>
+
+
+                    </div>
+                    <div style="max-width: 200px;">
+                        <h4>Last viewed</h4>
+                        <div class="card mb-2">
+                            <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1">
+                            <div class="card-body">
+                                <h6 class="card-title">Product 1</h6>
+                                <p class="card-text">55.60€</p>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1">
+                            <div class="card-body">
+                                <h6 class="card-title">Product 2</h6>
+                                <p class="card-text">55.60€</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Content -->
+                <div class="col-md-10">
+                    <!-- Checkout Steps -->
+                    <div class="d-flex justify-content-around align-items-center mb-4">
+                        <div class="text-center">
+                            <h2 class="font-weight-bold">1</h2>
+                            <p>Cart</p>
+                        </div>
+                        <div><i class="fas fa-arrow-right"></i></div>
+                        <div class="text-center">
+                            <h2>2</h2>
+                            <p>Payment</p>
+                        </div>
+                        <div><i class="fas fa-arrow-right"></i></div>
+                        <div class="text-center">
+                            <h2>3</h2>
+                            <p>Delivery details</p>
+                        </div>
+                    </div>
+
+                    <!-- Cart Section -->
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3>Products</h3>
+                            <h3>Price</h3>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image -->
+                                    <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1" alt="Product Image" style="width: 100px; height: auto;">
+
+                                    <!-- Product Name -->
+                                    <h5 class="card-title mb-0">Product 1 black 256gb 2022 (xyz)</h5>
+
+                                    <!-- Quantity Adjustment -->
+                                    <div>
+                                        <button class="btn btn-secondary">-</button>
+                                        <input type="text" value="3" class="mx-2" style="width: 50px;"> <!-- Adjusted width for better alignment -->
+                                        <button class="btn btn-secondary">+</button>
+                                    </div>
+
+                                    <!-- Total Price -->
+                                    <p class="card-text">55.60 €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image -->
+                                    <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1" alt="Product Image" style="width: 100px; height: auto;">
+
+                                    <!-- Product Name -->
+                                    <h5 class="card-title mb-0">Product 2 black 256gb 2022 (xyz)</h5>
+
+                                    <!-- Quantity Adjustment -->
+                                    <div>
+                                        <button class="btn btn-secondary">-</button>
+                                        <input type="text" value="3" class="mx-2" style="width: 50px;"> <!-- Adjusted width for better alignment -->
+                                        <button class="btn btn-secondary">+</button>
+                                    </div>
+
+                                    <!-- Total Price -->
+                                    <p class="card-text">55.60 €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image -->
+                                    <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1" alt="Product Image" style="width: 100px; height: auto;">
+
+                                    <!-- Product Name -->
+                                    <h5 class="card-title mb-0">Product 3 black 256gb 2022 (xyz)</h5>
+
+                                    <!-- Quantity Adjustment -->
+                                    <div>
+                                        <button class="btn btn-secondary">-</button>
+                                        <input type="text" value="3" class="mx-2" style="width: 50px;"> <!-- Adjusted width for better alignment -->
+                                        <button class="btn btn-secondary">+</button>
+                                    </div>
+
+                                    <!-- Total Price -->
+                                    <p class="card-text">55.60 €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image -->
+                                    <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1" alt="Product Image" style="width: 100px; height: auto;">
+
+                                    <!-- Product Name -->
+                                    <h5 class="card-title mb-0">Product 4 black 256gb 2022 (xyz)</h5>
+
+                                    <!-- Quantity Adjustment -->
+                                    <div>
+                                        <button class="btn btn-secondary">-</button>
+                                        <input type="text" value="3" class="mx-2" style="width: 50px;"> <!-- Adjusted width for better alignment -->
+                                        <button class="btn btn-secondary">+</button>
+                                    </div>
+
+                                    <!-- Total Price -->
+                                    <p class="card-text">55.60 €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Image -->
+                                    <img src="https://th.bing.com/th/id/R.5f8b98acd656c6d261777d035c50a112?rik=9e0Xk%2brW5WO0Yg&riu=http%3a%2f%2fimg2.wikia.nocookie.net%2f__cb20140518072131%2ftowerofsaviors%2fimages%2f4%2f47%2fPlaceholder.png&ehk=CZAAxtW4x95yvm5bFj%2fqN8pJu9M9F1JW8H5KVFRhKnk%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" class="card-img-top" alt="Product 1" alt="Product Image" style="width: 100px; height: auto;">
+
+                                    <!-- Product Name -->
+                                    <h5 class="card-title mb-0">Product 5 black 256gb 2022 (xyz)</h5>
+
+                                    <!-- Quantity Adjustment -->
+                                    <div>
+                                        <button class="btn btn-secondary">-</button>
+                                        <input type="text" value="3" class="mx-2" style="width: 50px;"> <!-- Adjusted width for better alignment -->
+                                        <button class="btn btn-secondary">+</button>
+                                    </div>
+
+                                    <!-- Total Price -->
+                                    <p class="card-text">55.60 €</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Repeat for the number of products -->
+                    </div>
+
+                    <!-- Total Section -->
+                    <div class="text-right mb-4">
+                        <h5>In total: 156 €</h5>
+                        <button type="button" class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Link to Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Link to Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</section>
+</body>
+</html>
