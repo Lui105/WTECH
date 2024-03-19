@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClickPoint</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -19,9 +21,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Products</a>
         </li>
@@ -53,7 +52,7 @@
         <!-- Category List -->
         <div class="col-md-2">
           <h4>Categories</h4>
-          <div class="list-group">
+          <div class="list-group mb-3">
             <a href="#" class="list-group-item list-group-item-action">1st category</a>
             <a href="#" class="list-group-item list-group-item-action">2nd category</a>
             <a href="#" class="list-group-item list-group-item-action">3rd category</a>
@@ -89,7 +88,46 @@
         </div>
         <!-- Products -->
         <div class="col-md-10">
-          <h4>Popular</h4>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Popular</h4>
+            <div class="d-flex align-items-center">
+              <h5 class="mr-5">Filter by</h5>
+              <div class="form-group mb-2 mr-4">
+                <label for="rangeSlider">Max price: 50</label>
+                <input type="range" class="form-control-range" id="rangeSlider">
+              </div>
+              <button class="btn-lg mr-5">
+                <i class="bi bi-arrow-down-up"></i> <!-- Bootstrap 'sort' icon -->
+              </button>
+
+
+              <!-- First Dropdown for Filter -->
+              <div class="dropdown d-inline-block">
+                <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select color
+                </button>
+                <div class="dropdown-menu" aria-labelledby="filterDropdown">
+                  <a class="dropdown-item" href="#">Option 1</a>
+                  <a class="dropdown-item" href="#">Option 2</a>
+                  <a class="dropdown-item" href="#">Option 3</a>
+                </div>
+              </div>
+
+              <!-- Second Dropdown for Sorting -->
+              <div class="dropdown d-inline-block ml-2">
+                <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select brand
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                  <a class="dropdown-item" href="#">Brand 1</a>
+                  <a class="dropdown-item" href="#">Brand 2</a>
+                  <a class="dropdown-item" href="#">Brand 3</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="row">
             <!-- Products go here, wrapped in 'col-md-4' for 3 products per row -->
             <div class="col-md-2 mb-3">
