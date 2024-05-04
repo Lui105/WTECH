@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('email', 256)->unique();
             $table->string('password', 256);
             $table->string('phone_number', 25)->nullable();
-            $table->foreignId('address_id')->nullable()->constrained('address')->onDelete('set null');
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->string('role');
             $table->timestamps();
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

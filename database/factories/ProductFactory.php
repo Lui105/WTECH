@@ -18,7 +18,16 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->words(2, true),
-            'price' => $this->faker->randomFloat(2, 10, 1000)
+            'price' => $this->faker->randomFloat(2, 10, 1000),
+            'description'=> $this->faker->text(200),
+            'parameters' => [
+                'color' => $this->faker->safeColorName(),
+                'size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),
+                'weight' => $this->faker->numberBetween(100, 5000) . ' grams'
+            ],
+            'created_at' => now(),
+            'updated_at' => now(),
+            'status' => $this->faker->randomElement(['In stock', 'Out of stock'])
         ];
     }
 }
