@@ -19,12 +19,9 @@ return new class extends Migration
             $table->string('email', 256)->unique();
             $table->string('password', 256);
             $table->string('phone_number', 25)->nullable();
-            $table->uuid('address_id')->nullable();
+            $table->foreignId('address_id')->nullable()->constrained('address')->onDelete('set null');
             $table->string('role');
             $table->timestamps();
-
-            $table->foreign('address_id')->references('id')->on('addresses')
-                  ->onDelete('set null');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -48,7 +45,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function (Blueprint $table) {
+                $table->dropForeign(['address_id']);
+            });
         Schema::dropIfExists('users');
+
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
