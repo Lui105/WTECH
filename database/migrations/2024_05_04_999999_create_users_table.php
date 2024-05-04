@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->string('username', 25)->unique();
             $table->string('email', 256)->unique();
             $table->string('password', 256);
             $table->string('phone_number', 25)->nullable();
             $table->unsignedBigInteger('address_id')->nullable();
             $table->string('role');
             $table->timestamps();
-            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
+            $table->foreign('address_id')->references('id')->on('address')->onDelete('set null');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

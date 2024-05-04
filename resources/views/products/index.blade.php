@@ -6,7 +6,13 @@
   <title>ClickPoint</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
+    <style>
+      .nav-link {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+    </style>
 
 </head>
 <body>
@@ -21,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{{ route('dashboard') }}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Products</a>
@@ -34,13 +40,18 @@
         </li>
       </ul>
       <div class="navbar-nav ml-auto">
-        <a href="#" class="nav-item nav-link"><i class="bi bi-cart" style="font-size: 30px;"></i></a>
-        <a href="#" class="nav-item nav-link"><i class="bi bi-person" style="font-size: 30px;"></i></a>
-        <a href="#" class="nav-item nav-link"><i class="bi bi-box-arrow-right" style="font-size: 30px;"></i></a>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+          <a href="#" class="nav-item nav-link"><i class="bi bi-cart" style="font-size: 30px;"></i></a>
+          <a href="{{ route('login') }}" class="nav-item nav-link"><i class="bi bi-person" style="font-size: 30px;"></i></a>
+          <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+              @csrf
+              <button type="submit" class="nav-item nav-link" style="background: none; border: none; padding: 0;">
+                  <i class="bi bi-box-arrow-right" style="font-size: 30px;"></i>
+              </button>
+          </form>
+          <form class="form-inline nav-item nav-link" style="margin-bottom: 0;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
       </div>
     </div>
   </nav>
