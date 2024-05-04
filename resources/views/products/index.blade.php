@@ -130,240 +130,29 @@
           </div>
 
 
-          <div class="row">
-  <!--Products-->
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
+            <div class="row">
+                @foreach ($products as $product)
+                    <div class="col-md-2 mb-3">
+                        <div class="card">
+                            <!-- Assuming the image is a placeholder and the same for all products -->
+                            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <p class="card-text">${{ $product->price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <div class="card">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Product</h5>
-                  <p class="card-text">55.60€</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </main>
-
   </div>
-  <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
-    <ul class="pagination">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <!-- Pagination numbers -->
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-  </nav>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        {{ $products->links() }}
+    </div>
+</div>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
