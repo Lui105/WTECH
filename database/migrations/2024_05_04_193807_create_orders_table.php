@@ -16,17 +16,10 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->char('order_number', 12);
             $table->string('status');
-            $table->id('address_id');
-            $table->id('payment_id');
-            $table->id('delivery_id');
+            $table->foreignId('address_id') ->constrained('address')->onDelete('set null');
+            $table->foreignId('payment_id') ->constrained('payment_details')->onDelete('set null');
+            $table->foreignId('delivery_id') ->constrained('delivery_method')->onDelete('set null');;
             $table->timestamps();
-        });
-
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('address_id')->references('id')->on('address');
-            $table->foreign('payment_id')->references('id')->on('payment_details');
-            $table->foreign('delivery_id')->references('id')->on('delivery_method');
         });
     }
 
