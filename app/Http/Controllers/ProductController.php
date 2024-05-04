@@ -36,9 +36,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function product_detail(Product $product)
     {
-        //
+        return view('product_detail', compact('product'));
     }
 
     /**

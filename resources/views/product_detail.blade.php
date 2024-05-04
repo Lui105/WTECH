@@ -124,9 +124,11 @@
 
                         <!-- Product Details -->
                         <div class="col-lg-6">
-                            <h2>Product</h2>
-                            <p class="text-success">In stock</p>
-                            <h3>55.60€</h3>
+                            <h2>{{ $product->name }}</h2>
+                            <p class="{{ $product->status == 'Out of stock' ? 'text-danger' : 'text-success' }}">
+                                {{ $product->status }}
+                            </p>
+                            <h3>{{ $product->price }} €</h3>
                             <div class="d-flex align-items-center mb-3">
                                 <input type="number" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
                                 <button type="button" class="btn btn-success ml-3">
@@ -134,39 +136,22 @@
                                 </button>
                             </div>
                             <h4>Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ac turpis egestas sed tempus urna. Vitae tortor
-                                condimentum lacinia quis vel eros donec ac. Imperdiet massa tincidunt nunc pulvinar
-                                sapien et ligula ullamcorper. Feugiat sed lectus vestibulum mattis ullamcorper velit.
-                                Pharetra sit amet aliquam id. Semper auctor neque vitae tempus. Et pharetra
-                                pharetra.</p>
+                            <p>{{ $product->description }}</p>
 
                             <h4>Parameters</h4>
                             <table class="table">
-                                <tr>
-                                    <th>Property 1</th>
-                                    <td>Value 1</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 2</th>
-                                    <td>Value 2</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 3</th>
-                                    <td>Value 3</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 4</th>
-                                    <td>Value 4</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 5</th>
-                                    <td>Value 5</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 6</th>
-                                    <td>Value 6</td>
-                                </tr>
+                                @if(is_array($product->parameters) && !empty($product->parameters))
+                                    @foreach($product->parameters as $key => $value)
+                                        <tr>
+                                            <th>{{ $key }}</th>
+                                            <td>{{ $value }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="2">No additional parameters available.</td>
+                                    </tr>
+                                @endif
                             </table>
                         </div>
                     </div>
