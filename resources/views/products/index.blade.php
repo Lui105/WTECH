@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Clickpointhsfgghgd')
+@section('title', 'Clickpoint')
 
 @section('content')
     <div class="col-md-10">

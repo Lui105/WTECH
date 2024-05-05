@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id');
+            $table->foreignId('user_id') ->constrained('users')->onDelete('set null');
             $table->char('order_number', 12);
-            $table->string('status');
+            $table->enum('status', ['In cart','Paid','Delivering','Delivered']);
             $table->foreignId('address_id') ->constrained('address')->onDelete('set null');
             $table->foreignId('payment_id') ->constrained('payment_details')->onDelete('set null');
             $table->foreignId('delivery_id') ->constrained('delivery_method')->onDelete('set null');;
