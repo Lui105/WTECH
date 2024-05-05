@@ -17,6 +17,12 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    public function admin_view()
+    {
+        $products = Product::paginate(24);
+        return view('admin_view', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

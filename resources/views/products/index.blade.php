@@ -3,7 +3,13 @@
 
 @section('content')
     <div class="col-md-10">
-        @include('components.filtering_clickpoint')
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Popular</h4>
+            <div class="d-flex align-items-center">
+                @include('components.filtering_clickpoint')
+            </div>
+        </div>
+
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-2 mb-3">
