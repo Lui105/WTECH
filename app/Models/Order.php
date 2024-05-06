@@ -40,5 +40,9 @@ class Order extends Model
     {
         return $this->belongsTo(DeliveryMethod::class, 'delivery_id')->withDefault();
     }
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
 }

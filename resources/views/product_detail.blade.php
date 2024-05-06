@@ -45,11 +45,21 @@
                 </p>
                 <h3>{{ $product->price }} €</h3>
                 <div class="d-flex align-items-center mb-3">
-                    <input type="number" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
-                    <button type="button" class="btn btn-success ml-3">
-                        <i class="bi bi-cart"></i> Add to Cart
-                    </button>
+                    <form action="{{ route('add_to_cart') }}" method="POST">
+                        @csrf
+                        <input type="number" name="quantity" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
+                        <input type="hidden" name="productId" value="{{ $product->id }}">
+                        <button type="submit" class="btn btn-success ml-3">
+                            <i class="bi bi-cart"></i> Add to Cart
+                        </button>
+                    </form>
                 </div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
                 <h4>Description</h4>
                 <p>{{ $product->description }}</p>
 

@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
                 ]);
 
                 Auth::login($user);
-                return redirect()->intended('dashboard');
+                return redirect()->intended(route('dashboard'));
             } catch (\Exception $e) {
                 Log::error('Error creating user: ' . $e->getMessage());
                 return back()->withErrors(['error' => 'Unable to create user.']);

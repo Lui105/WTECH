@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id') ->constrained('users')->onDelete('set null');
+            $table->foreignId('user_id') -> nullable()->constrained('users')->onDelete('set null');
             $table->char('order_number', 12);
             $table->enum('status', ['In cart','Paid','Delivering','Delivered']);
-            $table->foreignId('address_id') ->constrained('address')->onDelete('set null');
-            $table->foreignId('payment_id') ->constrained('payment_details')->onDelete('set null');
-            $table->foreignId('delivery_id') ->constrained('delivery_method')->onDelete('set null');;
+            $table->foreignId('address_id') -> nullable()->constrained('address')->onDelete('set null');
+            $table->foreignId('payment_id') -> nullable()->constrained('payment_details')->onDelete('set null');
+            $table->foreignId('delivery_id') -> nullable()->constrained('delivery_method')->onDelete('set null');;
             $table->timestamps();
         });
     }
