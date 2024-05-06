@@ -34,8 +34,8 @@
                     <i class="bi bi-box-arrow-right" style="font-size: 30px;"></i>
                 </button>
             </form>
-            <form class="form-inline nav-item nav-link" style="margin-bottom: 0;">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline nav-item nav-link" action="{{ route('products') }}" method="GET" style="margin-bottom: 0;">
+                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>

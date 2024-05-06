@@ -20,6 +20,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->words(2, true),
             'price' => $this->faker->randomFloat(2, 10, 1000),
             'description'=> $this->faker->text(200),
+            'brand' => $this->faker->randomElement(['logitech', 'microsoft', 'asus', 'yenkee']),
             'parameters' => [
                 'color' => $this->faker->safeColorName(),
                 'size' => $this->faker->randomElement(['S', 'M', 'L', 'XL']),

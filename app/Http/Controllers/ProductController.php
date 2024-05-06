@@ -5,16 +5,57 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(24);
-        return view('products.index', compact('products'));
+        $query = Product::query();
+
+        if ($request->has('max_price')) {
+            $max_price = $request->max_price;
+            $query->where('price', '<=', $max_price);
+        }
+
+        if ($request->has('sort')) {
+            $sortOrder = $request->sort == 'asc' ? 'asc' : 'desc';
+            $query->orderBy('price', $sortOrder);
+        }
+        if ($request->has('color')) {
+            $color = $request->color;
+            $query->where('parameters->color', '=', $color);
+        }
+
+        if ($request->has('brand')) {
+            $brand = $request->brand;
+            $query->where('brand', '=', $brand);
+        }
+
+        if ($request->has('search')) {
+            $searchQuery = $request->input('search');
+            $query->where('name', 'like', '%' . $searchQuery . '%');
+        }
+
+
+        $parameters = Product::whereNotNull('parameters')
+            ->pluck('parameters');
+
+        $colors = collect($parameters)->map(function ($param) {
+            return $param['color'] ?? null;
+        })->filter()->unique()->values();
+
+        $brands = Product::query()
+            ->select('brand')
+            ->distinct()
+            ->pluck('brand');
+        $products = $query->paginate(24);
+
+        return view('products.index', compact('products', 'brands', 'colors'));
     }
 
     public function admin_view()

@@ -4,7 +4,10 @@
 @section('content')
     <div class="col-md-10">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4>Popular</h4>
+            @if(request()->has('search') || request()->has('max_price') || request()->has('asc') || request()->has('desc') || request()->has('color') || request()->has('brand'))
+                <a href="{{ route('products') }}" class="btn btn-sm btn-outline-danger mr-2">&times;</a>
+            @endif
+            <h4>{{ request("search", "Popular") !== "Popular" ? '"' . request("search") . '"' : request("search", "Popular") }}</h4>
             <div class="d-flex align-items-center">
                 @include('components.filtering_clickpoint')
             </div>

@@ -6,7 +6,7 @@ use App\Http\Requests\StoreOrderRequest;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index'])->name('products');
 Route::get('/products/{product}', [ProductController::class, 'product_detail'])->name('products.show');
 Route::get('/', [ProductController::class, 'index'])->name('dashboard');
 Route::get('/cart', [OrderController::class, 'index'])->name('cart');
