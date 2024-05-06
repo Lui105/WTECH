@@ -18,22 +18,27 @@ class OrderController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            $cart = Order::with('items')
-                ->where('user_id', auth()->id())
-                ->where('status', 'In cart')
-                ->firstOrFail();
+            $order = Order::with(['items'])
+                          ->where('user_id', auth()->id())
+                          ->where('status', 'In cart')
+                          ->first();
+
+            if ($order) {
+                $products = $order->items;
+            } else {
+                $products = collect();
+            }
         } else {
-            $cart = collect($request->session()->get('cart', []))->map(function ($item, $productId) {
+            $products = collect($request->session()->get('cart', []))->map(function ($item, $productId) {
                 return (object)[
                     'product_id' => $productId,
                     'quantity' => $item['quantity'],
                     'name' => $item['name'],
-                    'price' => $item['price'],
                 ];
             });
         }
 
-        return view('cart', compact('cart'));
+        return view('cart_page', compact('products', 'order'));
     }
 
     /**
@@ -106,20 +111,24 @@ class OrderController extends Controller
                 'user_id' => auth()->id(),
                 'status' => 'In cart',
             ], [
-                'order_number' => strtoupper(Str::random(10))
+                'order_number' => strtoupper(Str::random(10)),
+                'total_price' => 0
             ]);
 
             $orderItem = $order->items()->where('product_id', $productId)->first();
-
+            $totalPriceChange = 0;
             if ($orderItem) {
-                $orderItem->increment('quantity', $quantity);
+                $currentQuantity = $orderItem->pivot->quantity;
+                $orderItem->pivot->quantity = $currentQuantity + $quantity;
+                $orderItem->pivot->save();
+                $totalPriceChange = $product->price * $quantity;
             } else {
-                $order->items()->create([
-                    'product_id' => $productId,
-                    'quantity' => $quantity,
-                ]);
+                $order->items()->attach($productId, ['quantity' => $quantity]);
+                $totalPriceChange = $product->price * $quantity;
             }
 
+            $order->total_price += $totalPriceChange;
+            $order->save();
             return back()->with('success', 'Product added to cart!');
         } else {
             return $this->addToCartSession($request, $productId);
@@ -134,7 +143,7 @@ class OrderController extends Controller
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
         } else {
-            $cart[$productId] = ['quantity' => $quantity, 'name' => $product->name, 'price' => $product->price];
+            $cart[$productId] = ['quantity' => $quantity, 'name' => $product->name];
         }
 
         $request->session()->put('cart', $cart);
@@ -159,4 +168,51 @@ class OrderController extends Controller
             );
         }
     }
+    public function updateQuantity(UpdateOrderRequest $request, $productId)
+    {
+        $newQuantity = $request->input('quantity');
+        if (auth()->check() && $newQuantity > 0) {
+            $order = Order::with(['items'])->where('user_id', auth()->id())->where('status', 'In cart')->first();
+            if ($order) {
+                $orderItem = $order->items()->where('product_id', $productId)->first();
+                if ($orderItem) {
+                    $oldQuantity = $orderItem->pivot->quantity;
+                    $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
+
+                    $orderItem->pivot->quantity = $newQuantity;
+                    $orderItem->pivot->save();
+
+                    $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
+                    $order->total_price += $priceDifference;
+                    $order->save();
+                }
+    }
+        } else {
+            // Handle for guest or invalid quantity
+        }
+        return redirect()->route('cart')->with('success', 'Cart updated!');
+    }
+
+    public function deleteItem(UpdateOrderRequest $request, $productId)
+    {
+        if (auth()->check()) {
+            $order = Order::where('user_id', auth()->id())->where('status', 'In cart')->first();
+
+            if ($order) {
+                $orderItem = $order->items()->where('product_id', $productId)->first();
+                if ($orderItem) {
+                    $totalItemPrice = $orderItem->pivot->quantity * $orderItem->price;
+                    $order->total_price -= $totalItemPrice;
+                    $order->save();
+
+                    $order->items()->detach($productId);
+                }
+            }
+
+        } else {
+            // Handle for guest
+        }
+        return redirect()->route('cart')->with('success', 'Item removed from cart!');
+    }
+
 }

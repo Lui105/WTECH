@@ -10,13 +10,19 @@ class Product extends Model
     protected $casts = [
         'parameters'=>'array',
     ];
+    protected $fillable = [
+            'id', 'price'
+        ];
 
     use HasFactory;
     public function categories(){
         return $this->belongsToMany(Category::class)->withTimestamps();
     }
+
     public function orders()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Order::class, 'order_items')
+                    ->withPivot('quantity');
     }
+
 }

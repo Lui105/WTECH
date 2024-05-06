@@ -26,7 +26,7 @@
             </li>
         </ul>
         <div class="navbar-nav ml-auto">
-            <a href="#" class="nav-item nav-link"><i class="bi bi-cart" style="font-size: 30px;"></i></a>
+            <a href="{{route('cart')}}" class="nav-item nav-link"><i class="bi bi-cart" style="font-size: 30px;"></i></a>
             <a href="{{ route('login') }}" class="nav-item nav-link"><i class="bi bi-person" style="font-size: 30px;"></i></a>
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf

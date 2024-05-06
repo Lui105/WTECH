@@ -48,6 +48,11 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                     </x-slot>
                 </x-dropdown>
             </div>

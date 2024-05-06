@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{product}', [ProductController::class, 'product_detail'])->name('products.show');
 Route::get('/', [ProductController::class, 'index'])->name('dashboard');
+Route::get('/cart', [OrderController::class, 'index'])->name('cart');
+
 Route::get('/about', function() {
     return view('about_us');
 })->name('about');
@@ -20,6 +22,8 @@ Route::get('/add_product', function() {
 })->name('add_product');
 Route::get('/admin', [ProductController::class, 'admin_view'])->name('admin');
 Route::post('/add_to_cart', [OrderController::class, 'store'])->name('add_to_cart');
+Route::post('/cart/update/{productId}', [OrderController::class, 'updateQuantity'])->name('cart.update');
+Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])->name('cart.delete');
 
 
 require __DIR__.'/auth.php';
