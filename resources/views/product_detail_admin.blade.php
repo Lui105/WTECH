@@ -1,154 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClickPoint</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@extends('layouts.main')
 
-</head>
-<body>
+@section('title', 'Clickpoint')
 
-<!-- Navigation Bar -->
-<header>
-    @include('components.navbar_clickpoint')
-</header>
-
-<!-- Main content -->
-<section>
-    <div class="container-fluid mt-4">
-        <!-- Category and Product List -->
-        <main>
-            <div class="row">
-                <!-- Category List -->
-                <div class="col-md-2">
-                    <h4>Categories</h4>
-                    <div class="list-group mb-3">
-                        <a href="#" class="list-group-item list-group-item-action">1st category</a>
-                        <a href="#" class="list-group-item list-group-item-action">2nd category</a>
-                        <a href="#" class="list-group-item list-group-item-action">3rd category</a>
-                        <a href="#" class="list-group-item list-group-item-action">4th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">5th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">6th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">7th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">8th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">9th category</a>
-                        <a href="#" class="list-group-item list-group-item-action">10th category</a>
-
-
+@section('content')
+    <div class="col-md-10">
+        <div class="row">
+            <!-- Main Product Image -->
+            <div class="col-lg-5">
+                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Main Product" class="img-fluid" style="max-height: 600px;">
+                <h5 class="mt-4">Gallery</h5>
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
                     </div>
-                    <div style="max-width: 200px;">
-                        <h4>Last viewed</h4>
-                        <div class="card mb-2">
-                            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Product 1">
-                            <div class="card-body">
-                                <h6 class="card-title">Product 1</h6>
-                                <p class="card-text">55.60€</p>
-                            </div>
-                        </div>
-                        <div class="card mb-2">
-                            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Product 1">
-                            <div class="card-body">
-                                <h6 class="card-title">Product 1</h6>
-                                <p class="card-text">55.60€</p>
-                            </div>
-                        </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
                     </div>
-
-                </div>
-                <!-- Products -->
-                <div class="col-md-10">
-                    <div class="row">
-                        <!-- Main Product Image -->
-                        <div class="col-lg-5">
-                            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Main Product" class="img-fluid" style="max-height: 600px;">
-                            <h5 class="mt-4">Gallery</h5>
-                            <div class="row">
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3 mb-3">
-                                    <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                                </div>
-                                <div class="col-3">
-                                    <button type="button" class="btn btn-outline-secondary btn-block">View all</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Product Details -->
-                        <div class="col-lg-6">
-                            <h2>Product</h2>
-                            <p class="text-success">In stock</p>
-                            <h3>55.60€</h3>
-                            <div class="d-flex align-items-center mb-3">
-                                <input type="number" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
-                                <button type="button" class="btn btn-primary ml-3">
-                                    <i class="bi bi-pencil-square"></i> Edit product
-                                </button>
-                            </div>
-                            <h4>Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ac turpis egestas sed tempus urna. Vitae tortor
-                                condimentum lacinia quis vel eros donec ac. Imperdiet massa tincidunt nunc pulvinar
-                                sapien et ligula ullamcorper. Feugiat sed lectus vestibulum mattis ullamcorper velit.
-                                Pharetra sit amet aliquam id. Semper auctor neque vitae tempus. Et pharetra
-                                pharetra.</p>
-
-                            <h4>Parameters</h4>
-                            <table class="table">
-                                <tr>
-                                    <th>Property 1</th>
-                                    <td>Value 1</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 2</th>
-                                    <td>Value 2</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 3</th>
-                                    <td>Value 3</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 4</th>
-                                    <td>Value 4</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 5</th>
-                                    <td>Value 5</td>
-                                </tr>
-                                <tr>
-                                    <th>Property 6</th>
-                                    <td>Value 6</td>
-                                </tr>
-                            </table>
-                        </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-outline-secondary btn-block">View all</button>
                     </div>
                 </div>
             </div>
-        </main>
 
+            <!-- Product Details -->
+            <div class="col-lg-6">
+                <h2>{{ $product->name }}</h2>
+                <p class="{{ $product->status == 'Out of stock' ? 'text-danger' : 'text-success' }}">
+                    {{ $product->status }}
+                </p>
+                <h3>{{ $product->price }} €</h3>
+                <div class="d-flex align-items-center mb-3">
+                    <form action="{{ route('add_to_cart') }}" method="POST">
+                        @csrf
+                        <input type="number" name="quantity" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
+                        <button type="button" class="btn btn-primary ml-3">
+                            <i class="bi bi-pencil-square"></i> Edit product
+                        </button>
+                        <input type="hidden" name="productId" value="{{ $product->id }}">
+                    </form>
+                </div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <h4>Description</h4>
+                <p>{{ $product->description }}</p>
+
+                <h4>Parameters</h4>
+                <table class="table">
+                    @if(is_array($product->parameters) && !empty($product->parameters))
+                        @foreach($product->parameters as $key => $value)
+                            <tr>
+                                <th>{{ $key }}</th>
+                                <td>{{ $value }}</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="2">No additional parameters available.</td>
+                        </tr>
+                    @endif
+                </table>
+            </div>
+        </div>
     </div>
-</section>
+@endsection
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>

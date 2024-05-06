@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClickPoint - Create New Password</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
-<body>
+@extends('layouts.main')
+@section('title', 'Clickpointhsfgghgd')
 
-<header>
-    @include('components.navbar_clickpoint')
-</header>
-
-<!-- Main content -->
-<section>
+@section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 mt-5">
@@ -48,10 +35,6 @@
             </div>
         </div>
     </div>
-</section>
+@endsection
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+

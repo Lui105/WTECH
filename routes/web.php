@@ -21,6 +21,9 @@ Route::get('/add_product', function() {
     return view('add_product_page');
 })->name('add_product');
 Route::get('/admin', [ProductController::class, 'admin_view'])->name('admin');
+Route::get('/delivery', function() {
+    return view('delivery_page');
+});
 Route::post('/add_to_cart', [OrderController::class, 'store'])->name('add_to_cart');
 Route::post('/cart/update/{productId}', [OrderController::class, 'updateQuantity'])->name('cart.update');
 Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])->name('cart.delete');
