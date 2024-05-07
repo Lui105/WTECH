@@ -22,7 +22,7 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-2 mb-3">
-                    <a href="{{ route('products.show', $product->id) }}" style="text-decoration: none; color: black;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" class="card">
+                    <a href="{{ route('product.update-last-viewed', $product->id) }}" style="text-decoration: none; color: black;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" class="card">
                         <img src="{{ $product->image_url ? asset($product->image_url) : asset('images/default.jpg') }}" alt="Image of {{ $product->name }}">
 
                         <div class="card-body">

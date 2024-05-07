@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -59,6 +59,10 @@ class ProductController extends Controller
             $product->image_url = asset($imagePath);
         });
 
+
+
+
+
         return view('products.index', compact('products', 'brands', 'colors'));
     }
 
@@ -67,6 +71,8 @@ class ProductController extends Controller
         $products = Product::paginate(24);
         return view('admin_view', compact('products'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -93,6 +99,32 @@ class ProductController extends Controller
 
         return view('product_detail', compact('product'));
     }
+
+    public function updateLastViewed($id)
+    {
+        $product = Product::findOrFail($id);
+        $user = Auth::user();
+
+        if ($user) {
+            $lastViewed = json_decode($user->last_viewed, true);
+            if (is_null($lastViewed)) {
+                $lastViewed = [];
+            }
+
+            array_unshift($lastViewed, [
+                'product_id' => $product->id,
+                'product_name' => $product->name
+            ]);
+
+            $lastViewed = array_slice($lastViewed, 0, 2);
+
+            $user->last_viewed = json_encode($lastViewed);
+            $user->save();
+        }
+
+        return redirect()->route('products.show', $id);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
