@@ -56,7 +56,7 @@
                         <p class="text text-center">Create your account</p>
                         <hr>
                         <form method="POST" action="{{ route('register') }}">
-                            @csrf <!-- CSRF Token for Laravel -->
+                            @csrf
                             <div class="mb-3">
                                 <label for="first_name" class="form-label">First Name</label>
                                 <input id="first_name" name="first_name" class="form-control" placeholder="Enter first name" type="text" required>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('email', 256)->unique();
-            $table->string('password', 256);
+            $table->string('password', 256)->nullable();
             $table->string('phone_number', 25)->nullable();
             $table->unsignedBigInteger('address_id')->nullable();
             $table->string('role');

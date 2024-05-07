@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DeliveryMethodController;
+use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Requests\StoreOrderRequest;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
@@ -21,9 +22,10 @@ Route::get('/add_product', function() {
     return view('add_product_page');
 })->name('add_product');
 Route::get('/admin', [ProductController::class, 'admin_view'])->name('admin');
-Route::get('/delivery', function() {
-    return view('delivery_page');
-});
+Route::get('/payment', [PaymentDetailsController::class, 'index'])->name('payment');
+
+Route::get('/delivery', [DeliveryMethodController::class, 'index'])->name('delivery');
+Route::post('/delivery/details', [DeliveryMethodController::class, 'store'])->name('submit.delivery.details');
 Route::post('/add_to_cart', [OrderController::class, 'store'])->name('add_to_cart');
 Route::post('/cart/update/{productId}', [OrderController::class, 'updateQuantity'])->name('cart.update');
 Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])->name('cart.delete');

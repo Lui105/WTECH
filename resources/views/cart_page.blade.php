@@ -13,12 +13,12 @@
             <div><i class="bi bi-arrow-right" style="font-size: 40px;"></i></div>
             <div class="text-center">
                 <h2>2</h2>
-                <p>Payment</p>
+                <p>Delivery details</p>
             </div>
             <div><i class="bi bi-arrow-right" style="font-size: 40px;"></i></div>
             <div class="text-center">
                 <h2>3</h2>
-                <p>Delivery details</p>
+                <p>Payment</p>
             </div>
         </div>
 
@@ -39,8 +39,11 @@
 
         <!-- Total Section -->
         <div class="text-right mb-4">
-            <h5>Total: {{$order->total_price}} €</h5>
-            <button type="button" class="btn btn-primary">Continue</button>
+            @if($products->isEmpty())
+            @else
+                <h5>Total: {{$order->total_price}} €</h5>
+                <a href = "{{route('delivery')}}"type="button" class="btn btn-primary">Continue</a>
+            @endif
         </div>
     </div>
 @endsection
