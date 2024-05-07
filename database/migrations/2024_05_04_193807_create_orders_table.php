@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('status', ['In cart','Paid','Delivering','Delivered']);
             $table->foreignId('address_id') -> nullable()->constrained('address')->onDelete('set null');
             $table->foreignId('payment_id') -> nullable()->constrained('payment_details')->onDelete('set null');
-            $table->foreignId('delivery_id') -> nullable()->constrained('delivery_method')->onDelete('set null');;
+            $table->foreignId('delivery_id') -> nullable()->constrained('delivery_methods')->onDelete('set null');;
             $table->timestamps();
         });
     }

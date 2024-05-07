@@ -11,13 +11,13 @@
             </div>
             <div><i class="bi bi-arrow-right" style="font-size: 40px;"></i></div>
             <div class="text-center">
-                <h1><b>2</b></h1>
-                <p><b>Payment</b></p>
+                <h2>2</h2>
+                <p>Delivery details</p>
             </div>
             <div><i class="bi bi-arrow-right" style="font-size: 40px;"></i></div>
             <div class="text-center">
-                <h2>3</h2>
-                <p>Delivery details</p>
+                <h1><b>3</b></h1>
+                <p><b>Payment</b></p>
             </div>
         </div>
 

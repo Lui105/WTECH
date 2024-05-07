@@ -15,6 +15,8 @@ class Order extends Model
         'address_id',
         'payment_id',
         'delivery_id',
+        'guest_id',
+        'total_price'
     ];
 
 

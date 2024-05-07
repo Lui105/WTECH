@@ -9,33 +9,34 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (auth()->check()) {
             $order = Order::with(['items'])
-                          ->where('user_id', auth()->id())
-                          ->where('status', 'In cart')
-                          ->first();
+              ->where('user_id', auth()->id())
+              ->where('status', 'In cart')
+              ->first();
+        }
+        else{
+            $id = $request->session()->get('guest_id', Str::random(40));
+            $order = Order::with(['items'])
+              ->where('guest_id', $id)
+              ->where('status', 'In cart')
+              ->first();
 
-            if ($order) {
-                $products = $order->items;
-            } else {
-                $products = collect();
-            }
+        }
+
+        if ($order) {
+            $products = $order->items;
         } else {
-            $products = collect($request->session()->get('cart', []))->map(function ($item, $productId) {
-                return (object)[
-                    'product_id' => $productId,
-                    'quantity' => $item['quantity'],
-                    'name' => $item['name'],
-                ];
-            });
+            $products = collect();
         }
 
         return view('cart_page', compact('products', 'order'));
@@ -61,12 +62,51 @@ class OrderController extends Controller
 
 
         if (Auth::check()) {
-            $this->addToCartDatabase($productId, $quantity);
+            $order = Order::firstOrCreate([
+                    'user_id' => auth()->id(),
+                    'status' => 'In cart',
+                    ], [
+                        'order_number' => strtoupper(Str::random(10)),
+                        'total_price' => 0
+                    ]);
+
         } else {
-            $this->addToCartSession($request, $productId, $quantity);
+            $guestId = $request->session()->get('guest_id', strtoupper(Str::random(40)));
+
+            $request->session()->put('guest_id', $guestId);
+
+            $order = Order::firstOrCreate([
+                'guest_id' => $guestId,
+                'status' => 'In cart',
+            ], [
+                'order_number' => strtoupper(Str::random(10)),
+                'total_price' => 0
+            ]);
+        }
+        $order = Order::firstOrCreate([
+        'user_id' => auth()->id(),
+        'status' => 'In cart',
+        ], [
+            'order_number' => strtoupper(Str::random(10)),
+            'total_price' => 0
+        ]);
+
+        $orderItem = $order->items()->where('product_id', $productId)->first();
+        $totalPriceChange = 0;
+        if ($orderItem) {
+            $currentQuantity = $orderItem->pivot->quantity;
+            $orderItem->pivot->quantity = $currentQuantity + $quantity;
+            $orderItem->pivot->save();
+            $totalPriceChange = $product->price * $quantity;
+        } else {
+            $order->items()->attach($productId, ['quantity' => $quantity]);
+            $totalPriceChange = $product->price * $quantity;
         }
 
+        $order->total_price += $totalPriceChange;
+        $order->save();
         return back()->with('success', 'Product added to cart!');
+
     }
 
     /**
@@ -102,93 +142,113 @@ class OrderController extends Controller
     }
 
 
-    private function addToCartDatabase($productId, $quantity)
-    {
-        $product = Product::findOrFail($productId);
+//     private function addToCartDatabase($productId, $quantity)
+//     {
+//         $product = Product::findOrFail($productId);
+//
+//         if (auth()->check()) {
+//             $order = Order::firstOrCreate([
+//                 'user_id' => auth()->id(),
+//                 'status' => 'In cart',
+//             ], [
+//                 'order_number' => strtoupper(Str::random(10)),
+//                 'total_price' => 0
+//             ]);
+//
+//             $orderItem = $order->items()->where('product_id', $productId)->first();
+//             $totalPriceChange = 0;
+//             if ($orderItem) {
+//                 $currentQuantity = $orderItem->pivot->quantity;
+//                 $orderItem->pivot->quantity = $currentQuantity + $quantity;
+//                 $orderItem->pivot->save();
+//                 $totalPriceChange = $product->price * $quantity;
+//             } else {
+//                 $order->items()->attach($productId, ['quantity' => $quantity]);
+//                 $totalPriceChange = $product->price * $quantity;
+//             }
+//
+//             $order->total_price += $totalPriceChange;
+//             $order->save();
+//             return back()->with('success', 'Product added to cart!');
+//         } else {
+//             return $this->addToCartSession($request, $productId);
+//         }
+//     }
+//
+//     private function addToCartSession(Request $request, $productId, $quantity)
+//     {
+//         $product = Product::findOrFail($productId);
+//         $guestId = $request->session()->get('guest_id', strtoupper(Str::random(40)));
+//
+//         $request->session()->put('guest_id', $guestId);
+//
+//         $order = Order::firstOrCreate([
+//             'guest_id' => $guestId,
+//             'status' => 'In cart',
+//         ], [
+//             'order_number' => strtoupper(Str::random(10)),
+//             'total_price' => 0
+//         ]);
+//
+//         $orderItem = $order->items()->where('product_id', $productId)->first();
+//         $totalPriceChange = 0;
+//         if ($orderItem) {
+//             $currentQuantity = $orderItem->pivot->quantity;
+//             $orderItem->pivot->quantity = $currentQuantity + $quantity;
+//             $orderItem->pivot->save();
+//             $totalPriceChange = $product->price * $quantity;
+//         } else {
+//             $order->items()->attach($productId, ['quantity' => $quantity]);
+//             $totalPriceChange = $product->price * $quantity;
+//         }
+//
+//         $order->total_price += $totalPriceChange;
+//         $order->save();
+//
+//         return back()->with('success', 'Product added to cart!');
+//     }
 
-        if (auth()->check()) {
-            $order = Order::firstOrCreate([
-                'user_id' => auth()->id(),
-                'status' => 'In cart',
-            ], [
-                'order_number' => strtoupper(Str::random(10)),
-                'total_price' => 0
-            ]);
-
-            $orderItem = $order->items()->where('product_id', $productId)->first();
-            $totalPriceChange = 0;
-            if ($orderItem) {
-                $currentQuantity = $orderItem->pivot->quantity;
-                $orderItem->pivot->quantity = $currentQuantity + $quantity;
-                $orderItem->pivot->save();
-                $totalPriceChange = $product->price * $quantity;
-            } else {
-                $order->items()->attach($productId, ['quantity' => $quantity]);
-                $totalPriceChange = $product->price * $quantity;
-            }
-
-            $order->total_price += $totalPriceChange;
-            $order->save();
-            return back()->with('success', 'Product added to cart!');
-        } else {
-            return $this->addToCartSession($request, $productId);
-        }
-    }
-
-    private function addToCartSession(StoreOrderRequest $request, $productId, $quantity)
-    {
-        $product = Product::findOrFail($productId);
-        $cart = $request->session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += $quantity;
-        } else {
-            $cart[$productId] = ['quantity' => $quantity, 'name' => $product->name];
-        }
-
-        $request->session()->put('cart', $cart);
-
-        return back()->with('success', 'Product added to cart!');
-    }
 
 
 
-    public function transferSessionCartToDatabase(Request $request)
-    {
-        $sessionCart = $request->session()->pull('cart', []);
-        $order = Order::firstOrCreate([
-            'user_id' => $user->id,
-            'status' => 'In cart',
-        ]);
-
-        foreach ($sessionCart as $productId => $details) {
-            $order->items()->updateOrCreate(
-                ['product_id' => $productId],
-                ['quantity' => $details['quantity'], 'price' => $details['price']]
-            );
-        }
-    }
+//     public function transferSessionCartToDatabase(Request $request)
+//     {
+//         $sessionCart = $request->session()->pull('cart', []);
+//         $order = Order::firstOrCreate([
+//             'user_id' => $user->id,
+//             'status' => 'In cart',
+//         ]);
+//
+//         foreach ($sessionCart as $productId => $details) {
+//             $order->items()->updateOrCreate(
+//                 ['product_id' => $productId],
+//                 ['quantity' => $details['quantity'], 'price' => $details['price']]
+//             );
+//         }
+//     }
     public function updateQuantity(UpdateOrderRequest $request, $productId)
     {
         $newQuantity = $request->input('quantity');
         if (auth()->check() && $newQuantity > 0) {
             $order = Order::with(['items'])->where('user_id', auth()->id())->where('status', 'In cart')->first();
-            if ($order) {
-                $orderItem = $order->items()->where('product_id', $productId)->first();
-                if ($orderItem) {
-                    $oldQuantity = $orderItem->pivot->quantity;
-                    $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
+        }
+        else if($newQuantity > 0){
+            $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'In cart')->first();
 
-                    $orderItem->pivot->quantity = $newQuantity;
-                    $orderItem->pivot->save();
+        }
+        if ($order) {
+            $orderItem = $order->items()->where('product_id', $productId)->first();
+            if ($orderItem) {
+                $oldQuantity = $orderItem->pivot->quantity;
+                $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
 
-                    $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
-                    $order->total_price += $priceDifference;
-                    $order->save();
-                }
-    }
-        } else {
-            // Handle for guest or invalid quantity
+                $orderItem->pivot->quantity = $newQuantity;
+                $orderItem->pivot->save();
+
+                $priceDifference = ($newQuantity - $oldQuantity) * $orderItem->price;
+                $order->total_price += $priceDifference;
+                $order->save();
+            }
         }
         return redirect()->route('cart')->with('success', 'Cart updated!');
     }
@@ -197,21 +257,23 @@ class OrderController extends Controller
     {
         if (auth()->check()) {
             $order = Order::where('user_id', auth()->id())->where('status', 'In cart')->first();
-
-            if ($order) {
-                $orderItem = $order->items()->where('product_id', $productId)->first();
-                if ($orderItem) {
-                    $totalItemPrice = $orderItem->pivot->quantity * $orderItem->price;
-                    $order->total_price -= $totalItemPrice;
-                    $order->save();
-
-                    $order->items()->detach($productId);
-                }
-            }
-
         } else {
-            // Handle for guest
+            $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'In cart')->first();
         }
+
+        if ($order) {
+            $orderItem = $order->items()->where('product_id', $productId)->first();
+            if ($orderItem) {
+                $totalItemPrice = $orderItem->pivot->quantity * $orderItem->price;
+                $order->total_price -= $totalItemPrice;
+                $order->save();
+
+                $order->items()->detach($productId);
+            }
+        }
+
+
+
         return redirect()->route('cart')->with('success', 'Item removed from cart!');
     }
 

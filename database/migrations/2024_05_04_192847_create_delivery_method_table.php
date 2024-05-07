@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_method', function (Blueprint $table) {
+        Schema::create('delivery_methods', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['GLS', 'DPD','SlovakParcelService']);
+            $table->enum('type', ['GLS', 'DPD','Slovak Parcel Service']);
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_method');
+        Schema::dropIfExists('delivery_methods');
     }
 };
