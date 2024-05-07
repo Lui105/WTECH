@@ -24,6 +24,7 @@ Route::get('/add_product', function() {
 Route::get('/admin', [ProductController::class, 'admin_view'])->name('admin');
 Route::get('/payment', [PaymentDetailsController::class, 'index'])->name('payment');
 Route::get('/payment/success', [PaymentDetailsController::class, 'showSuccessPage'])->name('payment.success');
+Route::get('/product/view/{id}', [ProductController::class, 'updateLastViewed'])->name('product.update-last-viewed')->middleware('auth');
 
 Route::get('/delivery', [DeliveryMethodController::class, 'index'])->name('delivery');
 Route::post('/delivery/details', [DeliveryMethodController::class, 'store'])->name('submit.delivery.details');

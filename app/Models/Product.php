@@ -25,4 +25,9 @@ class Product extends Model
                     ->withPivot('quantity');
     }
 
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
 }

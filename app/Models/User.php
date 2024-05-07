@@ -19,6 +19,10 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'email', 'phone_number', 'password', 'role'
     ];
+
+    protected $casts = [
+        'last_viewed' => 'array'
+    ];
     public function orders()
     {
         return $this->hasMany(Order::class);
@@ -49,5 +53,10 @@ class User extends Authenticatable
     public function address()
     {
         return $this->hasOne(Address::class, 'id', 'address_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

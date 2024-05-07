@@ -16,20 +16,17 @@
     </div>
     <div style="max-width: 200px;">
         <h4>Last viewed</h4>
-        <div class="card mb-2">
-            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Product 1">
+        @forelse($lastViewedProducts as $product)
+        <a href="{{ route('product.update-last-viewed', $product->id) }}" style="text-decoration: none; color: black;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" class="card">
+            <img src="{{ $product->image_url ? asset($product->image_url) : asset('images/default.jpg') }}" alt="Image of {{ $product->name }}">
             <div class="card-body">
-                <h6 class="card-title">Product 1</h6>
-                <p class="card-text">55.60€</p>
+                <h6 class="card-title">{{ $product->name }}</h6>
+                <p class="card-text">{{ $product->price }}€</p>
             </div>
-        </div>
-        <div class="card mb-2">
-            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Product 1">
-            <div class="card-body">
-                <h6 class="card-title">Product 1</h6>
-                <p class="card-text">55.60€</p>
-            </div>
-        </div>
+        </a>
+        @empty
+            <p>You have not viewed any products recently.</p>
+        @endforelse
     </div>
 
 </div>
