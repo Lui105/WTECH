@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Address::class, 'id', 'address_id');
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }

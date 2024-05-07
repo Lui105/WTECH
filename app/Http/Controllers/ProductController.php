@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -42,18 +42,22 @@ class ProductController extends Controller
         }
 
 
-        $parameters = Product::whereNotNull('parameters')
-            ->pluck('parameters');
+        // After ensuring directories, continue to paginate
+        $products = $query->paginate(24);
 
+        // Fetch distinct colors and brands for filters
+        $parameters = Product::whereNotNull('parameters')->pluck('parameters');
         $colors = collect($parameters)->map(function ($param) {
             return $param['color'] ?? null;
         })->filter()->unique()->values();
 
-        $brands = Product::query()
-            ->select('brand')
-            ->distinct()
-            ->pluck('brand');
-        $products = $query->paginate(24);
+        $brands = Product::query()->select('brand')->distinct()->pluck('brand');
+
+        $products->each(function ($product) {
+            $firstImage = $product->images->first();  // Get the first image if exists
+            $imagePath = $firstImage ? 'images/' . $product->id . '/' . $firstImage->image_name : 'images/default.jpg';
+            $product->image_url = asset($imagePath);
+        });
 
         return view('products.index', compact('products', 'brands', 'colors'));
     }
@@ -85,6 +89,8 @@ class ProductController extends Controller
      */
     public function product_detail(Product $product)
     {
+        $product = Product::with('images')->findOrFail($product->id);
+
         return view('product_detail', compact('product'));
     }
 

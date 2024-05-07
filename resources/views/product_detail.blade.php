@@ -7,33 +7,26 @@
         <div class="row">
             <!-- Main Product Image -->
             <div class="col-lg-5">
-                <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Main Product" class="img-fluid" style="max-height: 600px;">
+                @if($product->images->isNotEmpty())
+                    <img src="{{ asset('images/' . $product->id . '/' . $product->images->first()->image_name) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 600px;">
+                @else
+                    <img src="{{ asset('images/default.jpg') }}" alt="Default Product Image" class="img-fluid" style="max-height: 600px;">
+                @endif
                 <h5 class="mt-4">Gallery</h5>
                 <div class="row">
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail" class="img-fluid">
-                    </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-outline-secondary btn-block">View all</button>
-                    </div>
+                    @if($product->images->isNotEmpty())
+                        @foreach($product->images as $image)
+                            <div class="col-3 mb-3">
+                                <img src="{{ asset('images/' . $product->id . '/' . $image->image_name) }}" alt="{{ $product->name }}" class="img-fluid" onclick="changeImage('{{ asset('images/' . $product->id . '/' . $image->image_name) }}');">
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="col-3 mb-3">
+                            <img src="{{ asset('images/default.jpg') }}" alt="Default Image" class="img-fluid" >
+                        </div>
+                    @endif
+
+
                 </div>
             </div>
 
@@ -48,10 +41,17 @@
                     <form action="{{ route('add_to_cart') }}" method="POST">
                         @csrf
                         <input type="number" name="quantity" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
+                        @if(Auth::user() && Auth::user()->isAdmin())
+                            <button type="button" class="btn btn-primary ml-3">
+                                <i class="bi bi-pencil-square"></i> Edit product
+                            </button>
+                        @endif
                         <input type="hidden" name="productId" value="{{ $product->id }}">
-                        <button type="submit" class="btn btn-success ml-3">
-                            <i class="bi bi-cart"></i> Add to Cart
-                        </button>
+                        @if(Auth::user() && !Auth::user()->isAdmin())
+                            <button type="submit" class="btn btn-success ml-3">
+                                <i class="bi bi-cart"></i> Add to Cart
+                            </button>
+                        @endif
                     </form>
                 </div>
                 @if (session('success'))
@@ -82,4 +82,11 @@
         </div>
     </div>
 @endsection
+
+<script>
+    function changeImage(src) {
+        const mainImage = document.querySelector('.col-lg-5 img.img-fluid');
+        mainImage.src = src;
+    }
+</script>
 
