@@ -91,7 +91,6 @@
             </div>
         </div>
 
-        <!-- Submission and Error Handling -->
         @if($errors->any())
         <div class="alert alert-danger">
             <ul>
