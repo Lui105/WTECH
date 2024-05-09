@@ -46,25 +46,25 @@
             <h3>Delivery details</h3>
             <div class="form-group">
                 <label for="addressLine1">Address line 1</label>
-                <input type="text" class="form-control" id="addressLine1" name="addressLine1" placeholder="Miletičova 4">
+                <input type="text" class="form-control" id="addressLine1" name="addressLine1" placeholder="Miletičova 4" value="{{ old('addressLine1', $addressDetails->address_line_1 ?? '') }}">
             </div>
             <div class="form-group">
                 <label for="addressLine2">Address line 2</label>
-                <input type="text" class="form-control" id="addressLine2" name="addressLine2" placeholder="Apartment n. 2">
+                <input type="text" class="form-control" id="addressLine2" name="addressLine2" placeholder="Apartment n. 2" value="{{ old('addressLine2', $addressDetails->address_line_2 ?? '') }}">
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="ZIP">ZIP Code</label>
-                    <input type="text" class="form-control" id="ZIP" name="ZIP" placeholder="814 05">
+                    <input type="text" class="form-control" id="ZIP" name="ZIP" placeholder="814 05" value="{{ old('zip', $addressDetails->zip ?? '') }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="City">City</label>
-                    <input type="text" class="form-control" id="City" name="City" placeholder="Bratislava">
+                    <input type="text" class="form-control" id="City" name="City" placeholder="Bratislava" value="{{ old('city', $addressDetails->city ?? '') }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" class="form-control" id="country" name="country" placeholder="Slovakia">
+                <input type="text" class="form-control" id="country" name="country" placeholder="Slovakia" value="{{ old('country', $addressDetails->country ?? '') }}">
             </div>
         </div>
 
@@ -74,20 +74,20 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John">
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="John" value="{{ old('firstName', $userDetails['firstName'] ?? '') }}">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe">
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Doe" value="{{ old('lastName', $userDetails['lastName'] ?? '') }}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="+421 903 123 456">
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="+421 903 123 456" value="{{ old('phoneNumber', $userDetails['phoneNumber'] ?? '') }}">
             </div>
             <div class="form-group">
                 <label for="emailAddress">Email Address</label>
-                <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="john.doe@gmail.com">
+                <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="john.doe@gmail.com" value="{{ old('emailAddress', $userDetails['emailAddress'] ?? '') }}">
             </div>
         </div>
 

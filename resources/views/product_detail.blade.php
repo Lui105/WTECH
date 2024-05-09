@@ -45,9 +45,8 @@
                             <button type="button" class="btn btn-primary ml-3">
                                 <i class="bi bi-pencil-square"></i> Edit product
                             </button>
-                        @endif
+                        @else
                         <input type="hidden" name="productId" value="{{ $product->id }}">
-                        @if(Auth::user() && !Auth::user()->isAdmin())
                             <button type="submit" class="btn btn-success ml-3">
                                 <i class="bi bi-cart"></i> Add to Cart
                             </button>

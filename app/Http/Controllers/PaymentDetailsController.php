@@ -24,7 +24,6 @@ class PaymentDetailsController extends Controller
             $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'In cart')->first();
         }
         $totalPrice = $order->total_price + $order->deliveryMethod->price;
-//         dd($paymentDetails);
         return view('payment_page', compact('paymentDetails', 'totalPrice'));
     }
 
@@ -94,11 +93,13 @@ class PaymentDetailsController extends Controller
     {
         if (auth()->check()) {
             $order = Order::where('user_id', auth()->id())->where('status', 'Paid')->first();
+            $user = User::where('id', auth()->id())->first();
+            $email = $user -> email;
         } else {
             $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'Paid')->first();
+            $email = $request -> session()-> get('email');
         }
         $orderNumber = $order -> order_number;
-        return view('payment_successful', compact('orderNumber'));
+        return view('payment_successful', compact('orderNumber', 'email'));
     }
-
 }
