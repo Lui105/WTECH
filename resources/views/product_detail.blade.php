@@ -8,21 +8,21 @@
             <!-- Main Product Image -->
             <div class="col-lg-5">
                 @if($product->images->isNotEmpty())
-                    <img src="{{ asset('images/' . $product->id . '/' . $product->images->first()->image_name) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 600px;">
+                    <img src="{{ asset('storage/images/' . $product->id . '/' . $product->images->first()->image_name) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 600px;">
                 @else
-                    <img src="{{ asset('images/default.jpg') }}" alt="Default Product Image" class="img-fluid" style="max-height: 600px;">
+                    <img src="{{ asset("storage/images/default.png") }}" alt="Default Product Image" class="img-fluid" style="max-height: 600px;">
                 @endif
                 <h5 class="mt-4">Gallery</h5>
                 <div class="row">
                     @if($product->images->isNotEmpty())
                         @foreach($product->images as $image)
                             <div class="col-3 mb-3">
-                                <img src="{{ asset('images/' . $product->id . '/' . $image->image_name) }}" alt="{{ $product->name }}" class="img-fluid" onclick="changeImage('{{ asset('images/' . $product->id . '/' . $image->image_name) }}');">
+                                <img src="{{ asset('storage/images/' . $product->id . '/' . $image->image_name) }}" alt="{{ $product->name }}" class="img-fluid" onclick="changeImage('{{ asset('storage/images/' . $product->id . '/' . $image->image_name) }}');">
                             </div>
                         @endforeach
                     @else
                         <div class="col-3 mb-3">
-                            <img src="{{ asset('images/default.jpg') }}" alt="Default Image" class="img-fluid" >
+                            <img src="{{ asset('storage/images/default.png') }}" alt="Default Image" class="img-fluid" >
                         </div>
                     @endif
 

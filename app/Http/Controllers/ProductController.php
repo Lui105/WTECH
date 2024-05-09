@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -42,10 +43,8 @@ class ProductController extends Controller
         }
 
 
-        // After ensuring directories, continue to paginate
         $products = $query->paginate(24);
 
-        // Fetch distinct colors and brands for filters
         $parameters = Product::whereNotNull('parameters')->pluck('parameters');
         $colors = collect($parameters)->map(function ($param) {
             return $param['color'] ?? null;
@@ -55,10 +54,9 @@ class ProductController extends Controller
 
         $products->each(function ($product) {
             $firstImage = $product->images->first();  // Get the first image if exists
-            $imagePath = $firstImage ? 'images/' . $product->id . '/' . $firstImage->image_name : 'images/default.jpg';
+            $imagePath = $firstImage ? 'storage/images/' . $product->id . '/' . $firstImage->image_name : 'storage/images/default.png';
             $product->image_url = asset($imagePath);
         });
-
 
 
 
@@ -82,13 +80,7 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProductRequest $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -99,6 +91,68 @@ class ProductController extends Controller
 
         return view('product_detail', compact('product'));
     }
+
+    public function store(Request $request)
+    {
+        Log::info('Received data:', $request->all());
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categories.*' => 'exists:categories,id',
+        ]);
+
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->parameters = $this->prepareParameters($request->input('paramName'), $request->input('paramValue'));
+        $product->save();
+        Log::info('savelosa');
+
+        if ($request->hasFile('images')) {
+            $folderPath = 'images/' . $product->id;
+            $storagePath = storage_path($folderPath);
+
+            if (!file_exists($storagePath)) {
+                mkdir($storagePath, 0777, true);
+            }
+            Log::info('tuto som ved');
+            foreach ($request->file('images') as $image) {
+                Log::info($folderPath);
+                $filename = $image->store($folderPath, 'public');
+                $product->images()->create(['image_name' => basename($filename)]);
+            }
+        }
+
+        if (!empty($request->categories)) {
+            $product->categories()->attach($request->categories);
+        }
+
+        return redirect()->route('products')->with('success', 'Product created successfully!');
+    }
+
+
+    /**
+     * Prepare parameters array for storing in JSON format.
+     *
+     * @param  array  $names
+     * @param  array  $values
+     * @return array
+     */
+    protected function prepareParameters($names, $values)
+    {
+        $parameters = [];
+        foreach ($names as $index => $name) {
+            if (!empty($name) && !empty($values[$index])) {
+                $parameters[$name] = $values[$index];
+            }
+        }
+        return $parameters;
+    }
+
+
 
     public function updateLastViewed($id)
     {
