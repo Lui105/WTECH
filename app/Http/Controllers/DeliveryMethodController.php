@@ -23,13 +23,23 @@ class DeliveryMethodController extends Controller
     public function index(Request $request)
     {
         $deliveryMethods = DeliveryMethod::all();
+        $userDetails = null;
+        $addressDetails = null;
         if (auth()->check()) {
+            $user = auth()->user();
             $order = Order::where('user_id', auth()->id())->where('status', 'In cart')->first();
+            $userDetails = [
+                'firstName' => $user->first_name,
+                'lastName' => $user->last_name,
+                'phoneNumber' => $user->phone_number,
+                'emailAddress' => $user->email
+            ];
+            $addressDetails = $user->address()->first();
         } else {
             $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'In cart')->first();
         }
         $totalPrice = $order->total_price;
-        return view('delivery_page', compact('deliveryMethods', 'totalPrice'));
+        return view('delivery_page', compact('deliveryMethods', 'totalPrice', 'userDetails', 'addressDetails'));
     }
 
     /**
@@ -62,6 +72,7 @@ class DeliveryMethodController extends Controller
             $order = Order::where('user_id', auth()->id())->where('status', 'In cart')->first();
         } else {
             $order = Order::with(['items'])->where('guest_id', $request->session()->get('guest_id'))->where('status', 'In cart')->first();
+            $request->session()->put('email', $validatedData['emailAddress']);
         }
 
         $address = Address::create([
@@ -88,6 +99,11 @@ class DeliveryMethodController extends Controller
         if (!$order->user_id && Auth::check()) {
             $order->user_id = $user->id;
             $order->save();
+        }
+        if (Auth::check()){
+            $user->address_id = $address->id;
+            $user->save();
+
         }
 
         return redirect()->route('payment')->with('success', 'Delivery details submitted successfully.');

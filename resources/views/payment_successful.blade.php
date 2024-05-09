@@ -15,7 +15,7 @@
             font-size: 1.25rem;
         }
         .success-container {
-            padding: 3rem !important;
+            padding: 3rem;
         }
         .btn-back-homepage {
             padding: .75rem 1.25rem;
@@ -44,9 +44,9 @@
                             <div class="text-center success-container border" style="background-color: #f8f9fa;">
                                 <i class="bi bi-check-circle success-icon"></i>
                                 <h2 class="mt-3">Payment successful</h2>
-                                <p class="success-message">Your order number is 1234 5678</p>
-                                <p class="success-message">A receipt has been sent to the email address john.doe@gmail.com</p>
-                                <a href="/" class="btn btn-primary btn-back-homepage">Back to homepage</a>
+                                <p class="success-message">Your order number is {{ $orderNumber }}</p>
+                                <p class="success-message">A receipt has been sent to the email address {{$email}}</p>
+                                <a href="{{route('dashboard')}}" class="btn btn-primary btn-back-homepage">Back to homepage</a>
                             </div>
                         </div>
                     </div>

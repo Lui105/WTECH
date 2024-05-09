@@ -23,10 +23,14 @@ Route::get('/add_product_page', function() {
 })->name('add_product_page');
 Route::get('/admin', [ProductController::class, 'admin_view'])->name('admin');
 Route::get('/payment', [PaymentDetailsController::class, 'index'])->name('payment');
+
+Route::get('/payment/success', [PaymentDetailsController::class, 'showSuccessPage'])->name('payment.success');
 Route::get('/product/view/{id}', [ProductController::class, 'updateLastViewed'])->name('product.update-last-viewed');
 
 Route::get('/delivery', [DeliveryMethodController::class, 'index'])->name('delivery');
 Route::post('/delivery/details', [DeliveryMethodController::class, 'store'])->name('submit.delivery.details');
+Route::post('/payment/details', [PaymentDetailsController::class, 'store'])->name('payment.store');
+
 Route::post('/add_to_cart', [OrderController::class, 'store'])->name('add_to_cart');
 Route::post('/cart/update/{productId}', [OrderController::class, 'updateQuantity'])->name('cart.update');
 Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])->name('cart.delete');
