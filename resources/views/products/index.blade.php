@@ -7,7 +7,11 @@
             @if(request()->has('search') || request()->has('max_price') || request()->has('asc') || request()->has('desc') || request()->has('color') || request()->has('brand'))
                 <a href="{{ route('products') }}" class="btn btn-sm btn-outline-danger mr-2">&times;</a>
             @endif
-            <h4>{{ request("search", "Popular") !== "Popular" ? '"' . request("search") . '"' : request("search", "Popular") }}</h4>
+            @if(request()->has('category'))
+                    <h4>{{ $cat_name }}</h4>
+                @else
+                    <h4>{{ request("search", "Popular") }}</h4>
+                @endif
             <div class="d-flex align-items-center">
                 @if(Auth::user() && Auth::user()->isAdmin())
                     <h5 class="mr-3">Add product</h5>

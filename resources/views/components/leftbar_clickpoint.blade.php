@@ -2,9 +2,8 @@
     <h4>Categories</h4>
     <div class="list-group mb-3">
         @foreach($categories as $name)
-            <a href="#" class="list-group-item list-group-item-action">{{ $name->category_name }}</a>
+            <a href="{{ route('products', ['category' => $name->id]) }}" class="list-group-item list-group-item-action">{{ $name->category_name }}</a>
         @endforeach
-
 
     </div>
     <div style="max-width: 200px;">

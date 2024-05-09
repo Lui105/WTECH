@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -41,6 +42,15 @@ class ProductController extends Controller
             $searchQuery = $request->input('search');
             $query->where('name', 'like', '%' . $searchQuery . '%');
         }
+        $cat_name = 'Popular';
+        if ($request->has('category')) {
+            $categoryId = $request->category;
+            $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('category_id', '=', $categoryId);
+            });
+            $cat_name = Category::where('id', $categoryId)->value('category_name');
+
+        }
 
 
         $products = $query->paginate(24);
@@ -61,7 +71,8 @@ class ProductController extends Controller
 
 
 
-        return view('products.index', compact('products', 'brands', 'colors'));
+
+        return view('products.index', compact('products', 'brands', 'colors', 'cat_name'));
     }
 
     public function admin_view()
@@ -69,6 +80,7 @@ class ProductController extends Controller
         $products = Product::paginate(24);
         return view('admin_view', compact('products'));
     }
+
 
 
 
