@@ -42,10 +42,8 @@ class ProductController extends Controller
         }
 
 
-        // After ensuring directories, continue to paginate
         $products = $query->paginate(24);
 
-        // Fetch distinct colors and brands for filters
         $parameters = Product::whereNotNull('parameters')->pluck('parameters');
         $colors = collect($parameters)->map(function ($param) {
             return $param['color'] ?? null;

@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         DB::table('payment_details')->insert([
-                ['payment_method' => 'PayPal'],
                 ['payment_method' => 'Visa'],
                 ['payment_method' => 'Mastercard']
         ]);
