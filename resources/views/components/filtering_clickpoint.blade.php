@@ -2,7 +2,7 @@
 <div class="form-group mb-2 mr-4">
     <form id="priceFilterForm">
         <label for="rangeSlider">Max price: <span id="priceValue">{{ request('max_price', 'Not set') }}</span></label>
-        <input type="range" name="max_price" class="form-control-range" id="rangeSlider" min="0" max="200" value="{{ request('max_price') }}">
+        <input type="range" name="max_price" class="form-control-range" id="rangeSlider" min="0" max="500" value="{{ request('max_price') }}">
     </form>
 </div>
 <button id="sortButton" class="btn-lg mr-5" onclick="toggleSortOrder()">
@@ -28,11 +28,11 @@
 <!-- Second Dropdown for Sorting -->
 <div class="dropdown d-inline-block ml-2">
     <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{request('brand', 'Select brand')}}
+        {{ucfirst(request('brand', 'Select brand'))}}
     </button>
     <div class="dropdown-menu" aria-labelledby="sortDropdown">
         @foreach($brands as $brand)
-            <a class="dropdown-item brand-filter" href="#" data-brand="{{ $brand }}">{{ $brand }}</a>
+            <a class="dropdown-item brand-filter" href="#" data-brand="{{ $brand }}">{{ ucfirst($brand) }}</a>
         @endforeach()
     </div>
 </div>

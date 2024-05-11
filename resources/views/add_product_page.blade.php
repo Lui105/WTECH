@@ -30,8 +30,18 @@
                 </small>
             </div>
             <div class="form-group">
+                <h5 for="productBrand">Brand</h5>
+                <select class="form-control" id="productBrand" name="brand">
+                    <option value="">Select a brand</option>
+                    <option value="logitech">Logitech</option>
+                    <option value="microsoft">Microsoft</option>
+                    <option value="asus">Asus</option>
+                    <option value="yenkee">Yenkee</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <h5>Price</h5>
-                <input type="number" class="form-control" placeholder="Enter price" name="price">
+                <input type="number" class="form-control" step="0.01" placeholder="Enter price" name="price">
             </div>
             <div class="form-group">
                 <h5>Description</h5>
@@ -68,6 +78,15 @@
                 </div>
             </div>
         </form>
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     </section>
 @endsection
 

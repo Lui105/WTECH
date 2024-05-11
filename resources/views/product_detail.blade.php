@@ -40,16 +40,18 @@
                 <div class="d-flex align-items-center mb-3">
                     <form action="{{ route('add_to_cart') }}" method="POST">
                         @csrf
-                        <input type="number" name="quantity" class="form-control mx-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
                         @if(Auth::user() && Auth::user()->isAdmin())
                             <button type="button" class="btn btn-primary ml-3">
                                 <i class="bi bi-pencil-square"></i> Edit product
                             </button>
-                        @else
-                        <input type="hidden" name="productId" value="{{ $product->id }}">
-                            <button type="submit" class="btn btn-success ml-3">
-                                <i class="bi bi-cart"></i> Add to Cart
-                            </button>
+                        @elseif ($product->status != 'Out of stock')
+                        <div class="d-flex align-items-center">
+                            <input type="number" name="quantity" class="form-control ml-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
+                            <input type="hidden" name="productId" value="{{ $product->id }}">
+                                <button type="submit" class="btn btn-success ml-3">
+                                    <i class="bi bi-cart"></i> Add to Cart
+                                </button>
+                        </div>
                         @endif
                     </form>
                 </div>

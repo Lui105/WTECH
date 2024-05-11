@@ -3,7 +3,13 @@
 
 @section('content')
     <div class="col-md-10">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="d-flex justify-content-between align-items-center mb-3">
+
             @if(request()->has('search') || request()->has('max_price') || request()->has('asc') || request()->has('desc') || request()->has('color') || request()->has('brand'))
                 <a href="{{ route('products') }}" class="btn btn-sm btn-outline-danger mr-2">&times;</a>
             @endif

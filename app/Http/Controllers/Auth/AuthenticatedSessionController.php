@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -25,21 +26,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+            return redirect()->route('dashboard')->with('status', 'Login was successful.');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->withErrors([
+                'email' => 'Incorrect email or password.'
+            ])->onlyInput('email');
+        }
     }
+
 
     /**
      * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Log::info('User logging out: ' . auth()->user()->id);
         if (Auth::check()) {
-            Log::info('bol lognuty');
             Auth::guard('web')->logout();
 
             $request->session()->invalidate();
@@ -47,6 +52,6 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerateToken();
         }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->route('dashboard')->with('status', 'Logout was successful.');
     }
 }
