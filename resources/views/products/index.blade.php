@@ -7,13 +7,17 @@
             @if(request()->has('search') || request()->has('max_price') || request()->has('asc') || request()->has('desc') || request()->has('color') || request()->has('brand'))
                 <a href="{{ route('products') }}" class="btn btn-sm btn-outline-danger mr-2">&times;</a>
             @endif
-            <h4>{{ request("search", "Popular") !== "Popular" ? '"' . request("search") . '"' : request("search", "Popular") }}</h4>
+            @if(request()->has('category'))
+                    <h4>{{ $cat_name }}</h4>
+                @else
+                    <h4>{{ request("search", "Popular") }}</h4>
+                @endif
             <div class="d-flex align-items-center">
                 @if(Auth::user() && Auth::user()->isAdmin())
                     <h5 class="mr-3">Add product</h5>
-                    <button class="btn-lg btn-primary mr-5">
+                    <a href="{{ route('add_product_page') }}" class="btn-lg btn-primary mr-5">
                         <i class="bi bi-plus-lg"></i>
-                    </button>
+                    </a>
                 @endif
                 @include('components.filtering_clickpoint')
             </div>
@@ -23,7 +27,7 @@
             @foreach ($products as $product)
                 <div class="col-md-2 mb-3">
                     <a href="{{ route('product.update-last-viewed', $product->id) }}" style="text-decoration: none; color: black;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" class="card">
-                        <img src="{{ $product->image_url ? asset($product->image_url) : asset('images/default.jpg') }}" alt="Image of {{ $product->name }}">
+                        <img src="{{ asset($product->image_url) }}" alt="Image of {{ $product->name }}">
 
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>

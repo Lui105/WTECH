@@ -5,10 +5,11 @@
 @section('content')
     <section class="container mt-4">
         <h2>Create New Product</h2>
-        <form>
+        <form action="{{ route('add_product') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="form-group mt-4">
-                <h5 for="productName">Product Name</h5>
-                <input type="text" class="form-control" id="productName" placeholder="Enter product name">
+                <h5>Product Name</h5>
+                <input type="text" class="form-control" placeholder="Enter product name" name="name">
             </div>
             <div class="form-group">
                 <h5 for="productCategory">Categories</h5>
@@ -17,20 +18,11 @@
                         Choose categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <form id="categoryForm">
+                        @foreach($categories as $cat_name)
                             <a class="dropdown-item">
-                                <input type="checkbox" name="categories" value="gaming"> Gaming
+                                <input type="checkbox" name="categories[]" value={{ $cat_name->id }}> {{$cat_name->category_name}}
                             </a>
-                            <a class="dropdown-item">
-                                <input type="checkbox" name="categories" value="basic"> Basic
-                            </a>
-                            <a class="dropdown-item">
-                                <input type="checkbox" name="categories" value="wireless"> Wireless
-                            </a>
-                            <a class="dropdown-item">
-                                <input type="checkbox" name="categories" value="wired"> Wired
-                            </a>
-                        </form>
+                        @endforeach
                     </div>
                 </div>
                 <small class="form-text text-muted">
@@ -38,16 +30,16 @@
                 </small>
             </div>
             <div class="form-group">
-                <h5 for="productPrice">Price</h5>
-                <input type="number" class="form-control" id="productPrice" placeholder="Enter price">
+                <h5>Price</h5>
+                <input type="number" class="form-control" placeholder="Enter price" name="price">
             </div>
             <div class="form-group">
-                <h5 for="productDescription">Description</h5>
-                <textarea class="form-control" id="productDescription" rows="3"></textarea>
+                <h5>Description</h5>
+                <textarea class="form-control" rows="3" name="description"></textarea>
             </div>
             <div class="form-group">
-                <h5 for="productImages">Product Images</h5>
-                <input type="file" class="form-control-file" id="productImages" multiple>
+                <h5>Product Images</h5>
+                <input type="file" class="form-control-file" name="images[]" multiple>
             </div>
             <div class="form-group mt-4">
                 <h5>Product Parameters</h5>
@@ -60,21 +52,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><input type="text" class="form-control" name="paramName[]" placeholder="Name"></td>
-                            <td><input type="text" class="form-control" name="paramValue[]" placeholder="Value"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" class="form-control" name="paramName[]" placeholder="Name"></td>
-                            <td><input type="text" class="form-control" name="paramValue[]" placeholder="Value"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" class="form-control" name="paramName[]" placeholder="Name"></td>
-                            <td><input type="text" class="form-control" name="paramValue[]" placeholder="Value"></td>
-                            <td></td>
-                        </tr>
+                        @for ($i = 0; $i < 5; $i++)
+                            <tr>
+                                <td><input type="text" class="form-control" name="paramName[]" placeholder="Name"></td>
+                                <td><input type="text" class="form-control" name="paramValue[]" placeholder="Value"></td>
+                            </tr>
+                        @endfor
                         </tbody>
                     </table>
                 </div>
@@ -82,9 +65,6 @@
             <div class="form-row mb-5">
                 <div class="col">
                     <button type="submit" class="btn btn-primary">Create Product</button>
-                </div>
-                <div class="col text-right">
-                    <button type="button" class="btn btn-outline-primary" id="addRowBtn"><i class="bi bi-plus-lg"></i> Add Parameter</button>
                 </div>
             </div>
         </form>

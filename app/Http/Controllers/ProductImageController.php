@@ -27,9 +27,9 @@ class ProductImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductImageRequest $request)
+    public function store()
     {
-        //
+        // Assuming that the validation rules are set in StoreProductImageRequest for 'image'
     }
 
     /**
