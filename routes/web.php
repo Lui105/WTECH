@@ -36,5 +36,8 @@ Route::post('/cart/update/{productId}', [OrderController::class, 'updateQuantity
 Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])->name('cart.delete');
 Route::post('/add_product', [ProductController::class, 'store'])->name('add_product');
 
+Route::delete('/delete_product/{product_id}', [ProductController::class, 'destroy'])->name('remove_product');
+
+Route::put('/edit_product/{product_id}', [ProductController::class, 'edit'])->name('edit_product');
 
 require __DIR__.'/auth.php';

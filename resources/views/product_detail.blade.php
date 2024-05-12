@@ -44,6 +44,7 @@
                             <button type="button" class="btn btn-primary ml-3">
                                 <i class="bi bi-pencil-square"></i> Edit product
                             </button>
+
                         @elseif ($product->status != 'Out of stock')
                         <div class="d-flex align-items-center">
                             <input type="number" name="quantity" class="form-control ml-2" value="1" min="1" aria-label="Quantity" style="width: 60px;">
