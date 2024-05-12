@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         Product::factory()->count(50)->create()->each(function ($product){
             $directoryPath = storage_path('app/public/images/' . $product->id);
             if (!File::isDirectory($directoryPath)) {
-                File::makeDirectory($directoryPath, 0755, true); // Ensure the directory exists
+                File::makeDirectory($directoryPath, 0755, true);
             }
         });
 

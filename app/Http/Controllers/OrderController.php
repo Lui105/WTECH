@@ -38,6 +38,12 @@ class OrderController extends Controller
         } else {
             $products = collect();
         }
+        if ($order) {
+            $products = $order->items->each(function ($item) {
+                $firstImage = $item->images->first();
+                $item->image_url = $firstImage ? asset('storage/images/' . $item->id . '/' . $firstImage->image_name) : asset('storage/images/default.png');
+            });
+        }
 
         return view('cart_page', compact('products', 'order'));
     }
@@ -83,13 +89,13 @@ class OrderController extends Controller
                 'total_price' => 0
             ]);
         }
-        $order = Order::firstOrCreate([
-        'user_id' => auth()->id(),
-        'status' => 'In cart',
-        ], [
-            'order_number' => strtoupper(Str::random(10)),
-            'total_price' => 0
-        ]);
+//         $order = Order::firstOrCreate([
+//         'user_id' => auth()->id(),
+//         'status' => 'In cart',
+//         ], [
+//             'order_number' => strtoupper(Str::random(10)),
+//             'total_price' => 0
+//         ]);
 
         $orderItem = $order->items()->where('product_id', $productId)->first();
         $totalPriceChange = 0;

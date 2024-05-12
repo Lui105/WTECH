@@ -14,7 +14,7 @@ return new class extends Migration
         DB::table('delivery_methods')->insert([
                 ['type' => 'GLS', 'price' => 2.99],
                 ['type' => 'DPD', 'price' => 2.49],
-                ['type' => 'SlovakParcelService', 'price' => 3.49],
+                ['type' => 'Slovak Parcel Service', 'price' => 3.49],
         ]);
     }
 

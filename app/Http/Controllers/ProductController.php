@@ -72,10 +72,6 @@ class ProductController extends Controller
             $product->image_url = asset($imagePath);
         });
 
-
-
-
-
         return view('products.index', compact('products', 'brands', 'colors', 'cat_name'));
     }
 
@@ -117,6 +113,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories.*' => 'exists:categories,id',
+            'brand' => 'required|in:logitech,microsoft,asus,yenkee',
         ]);
 
         $product = new Product();
@@ -124,8 +121,8 @@ class ProductController extends Controller
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->parameters = $this->prepareParameters($request->input('paramName'), $request->input('paramValue'));
+        $product -> brand = $request->input('brand');
         $product->save();
-        Log::info('savelosa');
 
         if ($request->hasFile('images')) {
             $folderPath = 'images/' . $product->id;
@@ -134,7 +131,6 @@ class ProductController extends Controller
             if (!file_exists($storagePath)) {
                 mkdir($storagePath, 0777, true);
             }
-            Log::info('tuto som ved');
             foreach ($request->file('images') as $image) {
                 Log::info($folderPath);
                 $filename = $image->store($folderPath, 'public');

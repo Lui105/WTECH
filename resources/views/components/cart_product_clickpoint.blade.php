@@ -1,30 +1,38 @@
 <div class="card mb-3">
     <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="row align-items-center">
             <!-- Image -->
-            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="{{ $item->name }}" style="width: 100px; height: auto;">
+            <div class="col-auto">
+                <img src="{{ $item->image_url }}" class="img-fluid" alt="{{ $item->name }}" style="width: 100px;">
+            </div>
 
             <!-- Product Name -->
-            <h5 class="card-title mb-0">{{ $item->name }}</h5>
-
+            <div class="col-md-3">
+                <h5 class="mb-0">{{ $item->name }}</h5>
+            </div>
 
             <!-- Quantity form -->
-            <form action="{{ route('cart.update', ['productId' => $item->id]) }}" method="POST">
-                @csrf
-                <input type="number" name="quantity" value="{{ $item->pivot->quantity }}" min="1" style="width: 50px;">
-                <button type="submit" class="btn btn-info">Update</button>
-            </form>
+            <div class="col-md">
+                <form action="{{ route('cart.update', ['productId' => $item->id]) }}" method="POST" class="d-flex align-items-center">
+                    @csrf
+                    <input type="number" name="quantity" class="form-control form-control-sm me-2" value="{{ $item->pivot->quantity }}" min="1" style="width: 80px;">
+                    <button type="submit" class="btn btn-info btn-sm">Update</button>
+                </form>
+            </div>
 
             <!-- Delete form -->
-            <form action="{{ route('cart.delete', $item->id) }}" method="POST">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="productId" value="{{ $item->id }}">
-                <button type="submit" class="btn btn-danger">Remove</button>
-            </form>
+            <div class="col-md-auto">
+                <form action="{{ route('cart.delete', $item->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </div>
 
             <!-- Total Price -->
-            <p class="card-text">{{ $item->price * $item->pivot->quantity}} €</p>
+            <div class="col-md-auto">
+                <p class="card-text">{{ number_format($item->price * $item->pivot->quantity, 2) }} €</p>
+            </div>
         </div>
     </div>
 </div>
