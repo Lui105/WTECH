@@ -86,24 +86,24 @@
                 <h5>Add Images</h5>
                 <input type="file" class="form-control-file" name="images[]" multiple>
             </div>
+            <ul id="file-list" class="list-unstyled" style="list-style-type: none;">
+                @foreach($product->images as $image)
+                    <li style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <img src="{{ asset('storage/images/' . $product->id . '/' . $image->image_name) }}" alt="Product Image" style="width: 100px; height: auto; margin-right: 10px;">
+                        <form action="{{ route('delete_image',$image->id) }}" method="POST" style="margin-bottom: 0;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
+                @endforeach
+            </ul>
             <div class="form-row mb-5">
                 <div class="col">
                     <button type="submit" class="btn btn-primary">Edit product</button>
                 </div>
             </div>
         </form>
-        <ul id="file-list" class="list-unstyled" style="list-style-type: none;">
-            @foreach($product->images as $image)
-                <li style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <img src="{{ asset('storage/images/' . $product->id . '/' . $image->image_name) }}" alt="Product Image" style="width: 100px; height: auto; margin-right: 10px;">
-                    <form action="{{ route('delete_image',$image->id) }}" method="POST" style="margin-bottom: 0;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
 
         @if ($errors->any())
             <div class="alert alert-danger">
