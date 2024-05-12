@@ -41,9 +41,9 @@
                     <form action="{{ route('add_to_cart') }}" method="POST">
                         @csrf
                         @if(Auth::user() && Auth::user()->isAdmin())
-                            <button type="button" class="btn btn-primary ml-3">
+                            <a href="{{ route('edit_product', $product->id) }}" class="btn btn-primary ml-3">
                                 <i class="bi bi-pencil-square"></i> Edit product
-                            </button>
+                            </a>
 
                         @elseif ($product->status != 'Out of stock')
                         <div class="d-flex align-items-center">
@@ -61,6 +61,9 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
+                <h4>Brand</h4>
+                <p>{{ $product->brand }}</p>
 
                 <h4>Description</h4>
                 <p>{{ $product->description }}</p>

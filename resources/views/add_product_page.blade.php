@@ -29,15 +29,9 @@
                     Select multiple categories from the dropdown.
                 </small>
             </div>
-            <div class="form-group">
-                <h5 for="productBrand">Brand</h5>
-                <select class="form-control" id="productBrand" name="brand">
-                    <option value="">Select a brand</option>
-                    <option value="logitech">Logitech</option>
-                    <option value="microsoft">Microsoft</option>
-                    <option value="asus">Asus</option>
-                    <option value="yenkee">Yenkee</option>
-                </select>
+            <div class="form-group mt-4">
+                <h5>Brand</h5>
+                <input type="text" class="form-control" placeholder="Enter product brand" name="brand">
             </div>
             <div class="form-group">
                 <h5>Price</h5>
@@ -46,10 +40,6 @@
             <div class="form-group">
                 <h5>Description</h5>
                 <textarea class="form-control" rows="3" name="description"></textarea>
-            </div>
-            <div class="form-group">
-                <h5>Product Images</h5>
-                <input type="file" class="form-control-file" name="images[]" multiple>
             </div>
             <div class="form-group mt-4">
                 <h5>Product Parameters</h5>
@@ -71,6 +61,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="form-group">
+                <h5>Product Images</h5>
+                <input type="file" class="form-control-file" name="images[]" multiple>
             </div>
             <div class="form-row mb-5">
                 <div class="col">
