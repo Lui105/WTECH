@@ -6,9 +6,13 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -195,9 +199,18 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Product $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'categories.*' => 'exists:categories,id',
+        ]);
+
+
     }
 
     /**
@@ -210,9 +223,37 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        // Begin transaction to ensure all operations are done safely
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            $product->categories()->detach();
+
+
+            $folderPath = 'public/images/' . $product->id;
+            if (Storage::exists($folderPath)) {
+                Storage::deleteDirectory($folderPath);
+            }
+
+            // Delete the product itself
+            $product->delete();
+
+            // Commit the transaction
+            DB::commit();
+
+            // Redirect with a success message
+            return redirect()->route('products')->with('success', 'Product deleted successfully!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('products')->with('error', 'Error deleting product: ' . $e->getMessage());
+        }
     }
+
+
 }

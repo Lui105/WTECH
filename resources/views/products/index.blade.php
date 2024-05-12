@@ -33,9 +33,13 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->price }} €</p>
                             @if(Auth::user() && Auth::user()->isAdmin())
-                                <button class="btn btn-danger btn-sm" type="button">
-                                    <i class="bi bi-dash"></i>
-                                </button>
+                                <form action="{{ route('remove_product', $product->id) }}" method="POST" onsubmit="return confirmDelete()">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-dash"></i>
+                                    </button>
+                                </form>
                             @endif
                         </div>
                     </a>
@@ -48,3 +52,9 @@
 @section('pagination')
     @include('components.pagination_clickpoint')
 @endsection
+
+<script>
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this product?');
+    }
+</script>
