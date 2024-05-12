@@ -6,16 +6,13 @@
     <!-- Main Content -->
     <div class="container mt-5">
         <h2 class="mb-4">About Us</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor mollis pretium. Donec cursus eros ultrices, malesuada arcu id, dictum tortor.
-            Cras accumsan augue orci, vitae vulputate est auctor dapibus. Mauris aliquam turpis vel scelerisque condimentum. Aenean tincidunt felis ut auctor bibendum.
-            Cras convallis in risus eu finibus. Donec diam augue,
-            blandit convallis turpis egestas, pulvinar placerat turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-
-        <h3 class="mt-5">Our Mission</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor mollis pretium. Donec cursus eros ultrices, malesuada arcu id, dictum tortor.
-            Cras accumsan augue orci, vitae vulputate est auctor dapibus. Mauris aliquam turpis vel scelerisque condimentum. Aenean tincidunt felis ut auctor bibendum.
-            Cras convallis in risus eu finibus. Donec diam augue,
-            blandit convallis turpis egestas, pulvinar placerat turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <p>Welcome to ClickPoint, your ultimate destination for top-quality computer mice.
+        At ClickPoint, we understand how crucial a reliable and precise mouse is to
+        both everyday users and gaming enthusiasts. That’s why we offer a diverse
+        selection of the finest computer mice on the market, catering to all preferences and needs.
+        From ergonomic designs that ensure comfort during long hours of use to gaming mice, we have it all.
+        At ClickPoint, we are committed to providing you with the best products and a seamless shopping experience.
+        </p>
 
 
     </div>
