@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DeliveryMethodController;
 use App\Http\Controllers\PaymentDetailsController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Requests\StoreOrderRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,8 @@ Route::post('/cart/delete/{productId}', [OrderController::class, 'deleteItem'])-
 Route::post('/add_product', [ProductController::class, 'store'])->name('add_product');
 
 Route::delete('/delete_product/{product_id}', [ProductController::class, 'destroy'])->name('remove_product');
-
-Route::put('/edit_product/{product_id}', [ProductController::class, 'edit'])->name('edit_product');
+Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('update');
+Route::get('/edit_product/{product_id}', [ProductController::class, 'edit'])->name('edit_product');
+Route::delete('/delete_image/{product_id}', [ProductImageController::class, 'delete_image'])->name('delete_image');
 
 require __DIR__.'/auth.php';

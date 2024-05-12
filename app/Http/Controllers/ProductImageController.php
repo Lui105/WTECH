@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProductImage;
 use App\Http\Requests\StoreProductImageRequest;
 use App\Http\Requests\UpdateProductImageRequest;
+use Illuminate\Support\Facades\File;
+
 
 class ProductImageController extends Controller
 {
@@ -62,5 +64,21 @@ class ProductImageController extends Controller
     public function destroy(ProductImage $productImage)
     {
         //
+    }
+
+    public function delete_image($id)
+    {
+        $image = ProductImage::findOrFail($id);
+        $imagePath = storage_path('app/public/images/' . $image->product_id . '/' . $image->image_name);
+
+        // Delete the file from storage
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
+        // Delete the record from the database
+        $image->delete();
+
+        return back()->with('success', 'Image deleted successfully');
     }
 }

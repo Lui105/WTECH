@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\ProductImage;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -113,7 +114,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories.*' => 'exists:categories,id',
-            'brand' => 'required|in:logitech,microsoft,asus,yenkee',
+            'brand' => 'required|string|max:255',
         ]);
 
         $product = new Product();
@@ -195,27 +196,63 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $request, $id)
+
+    public function edit($id)
+    {
+        $product = Product::with('images')->findOrFail($id); // Retrieve product by ID
+        $parameter_count = count($product->parameters);
+        $selectedCategoryIds = $product->categories->pluck('id')->toArray();
+        // Return the edit view, passing in the required data
+        return view('edit_product_page', compact('product', 'parameter_count', 'selectedCategoryIds'));
+    }
+
+
+    public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        Log::info('Received data:', $request->all());
+
         $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'description' => 'required|string',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories.*' => 'exists:categories,id',
+            'brand' => 'required|string|max:255',
         ]);
+        Log::info('tuto som');
 
 
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->parameters = $this->prepareParameters($request->input('paramName'), $request->input('paramValue'));
+        $product->brand = $request->input('brand');
+        $product->save();
+        Log::info('tuto som??');
+
+
+        if ($request->hasFile('images')) {
+            $folderPath = 'images/' . $product->id;
+            $storagePath = storage_path($folderPath);
+
+            if (!file_exists($storagePath)) {
+                mkdir($storagePath, 0777, true);
+            }
+            foreach ($request->file('images') as $image) {
+                Log::info($folderPath);
+                $filename = $image->store($folderPath, 'public');
+                $product->images()->create(['image_name' => basename($filename)]);
+            }
+        }
+
+        if (!empty($request->categories)) {
+            $product->categories()->sync($request->categories);
+        }
+
+        return redirect()->route('products')->with('success', 'Product updated successfully!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
