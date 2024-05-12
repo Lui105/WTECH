@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
             $table->enum('payment_method', ['Visa', 'Mastercard']);
-            $table->timestamps();
         });
     }
 

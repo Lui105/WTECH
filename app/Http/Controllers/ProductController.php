@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         if ($request->has('search')) {
             $searchQuery = $request->input('search');
-            $query->where(strtolower('name'), 'like', '%' . strtolower($searchQuery) . '%');
+            $query->where('name', 'ilike', '%' . $searchQuery . '%');
         }
         $cat_name = 'Popular';
         if ($request->has('category')) {
