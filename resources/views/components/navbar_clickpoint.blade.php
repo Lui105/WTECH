@@ -23,12 +23,16 @@
                 <a class="nav-link" href="{{ route('contact') }}">Contact us</a>
             </li>
         </ul>
-        <div class="navbar-nav ml-auto">
-            <a href="{{route('cart')}}" class="nav-item nav-link"><i class="bi bi-cart" style="font-size: 30px;"></i></a>
-            <a href="{{ route('login') }}" class="nav-item nav-link"><i class="bi bi-person" style="font-size: 30px;"></i></a>
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+        <div class="navbar-nav ml-auto align-items-center">
+            <a href="{{route('cart')}}" class="nav-item nav-link p-2">
+                <i class="bi bi-cart" style="font-size: 30px;"></i>
+            </a>
+            <a href="{{ route('login') }}" class="nav-item nav-link p-2">
+                <i class="bi bi-person" style="font-size: 30px;"></i>
+            </a>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;" class="nav-item nav-link p-2 m-0">
                 @csrf
-                <button type="submit" class="nav-item nav-link" style="background: none; border: none; padding: 0;">
+                <button type="submit" style="background: none; border: none; padding: 0;">
                     <i class="bi bi-box-arrow-right" style="font-size: 30px;"></i>
                 </button>
             </form>
